@@ -48,7 +48,7 @@ title %Title%
 :: Note: if something breaks contact Krak8 : https://youtube.com/krak8
 :: -----------------------------------------------
 
-
+:Main
 echo.
 echo %Credits%
 echo ....................................
@@ -59,7 +59,7 @@ echo Advance Flags(12gb+ server only): %HFlags%
 echo Vaanila GUI: %GUI%
 echo AutoRestart: %AutoRestart%
 echo ....................................
-timeout 20
+Pause
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
 
@@ -83,9 +83,25 @@ if %EULA%==false (
     echo #Auto generated EULA from script Made By Krak8 ^(https^://youtube.com/krak8^)^. >> eula.txt
     echo eula=false>> eula.txt
     )
-if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO )
+if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO START)
 
-:Start
+:START
+
+echo %Credits%
+%JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
+echo %Credits%
+timeout 20
+cls
+echo %Credits%
+echo.
+echo Server has closed or crashed...
+echo The Server will not AutoRestart
+echo.
+echo 
+timeout 20
+goto MAIN
+
+:RESTART
 cls
 
 echo %Credits%
@@ -100,4 +116,4 @@ echo Server has closed or crashed...
 echo.
 echo The Server will restart after the timeout close console window to stop server now!
 timeout 20
-goto Start
+goto RESTART
