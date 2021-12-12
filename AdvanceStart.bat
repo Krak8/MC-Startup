@@ -40,13 +40,10 @@ set IniRam=200M
 set GUI=false
 
 
-
 :: -----------------------------------------------
 :: WARNING DO NOT CHANGE ANYTHING BELOW THIS LINE
 :: Note: if something breaks contact Krak8 : https://youtube.com/krak8
 :: -----------------------------------------------
-
-
 
 
 echo.
