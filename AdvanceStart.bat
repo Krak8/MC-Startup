@@ -71,6 +71,14 @@ if %EULA%==true (
     echo #Auto generated EULA from script Made By Krak8 ^(https^://youtube.com/krak8^)^. >> eula.txt
     echo eula=true>> eula.txt
     )
+if %EULA%==false (
+    @echo off
+    cd %localhost%
+    echo #By changing the setting below to TRUE you are indicating your agreement to our EULA ^(https://account.mojang.com/documents/minecraft_eula^)^.> eula.txt
+    echo #You also agree that tacos are tasty, and the best food in the world^.>> eula.txt
+    echo #Auto generated EULA from script Made By Krak8 ^(https^://youtube.com/krak8^)^. >> eula.txt
+    echo eula=false>> eula.txt
+    )
 
 :Start
 cls
