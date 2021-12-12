@@ -9,6 +9,7 @@
 :: |__/  \__/      |__/             \_______/      |__/  \__/       \______/ 
 ::
 :: Made By Krak8 (https://youtube.com/krak8)
+:: https://github.com/Krak8/MC-Startup
 ::
 
 @echo off
