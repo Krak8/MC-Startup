@@ -120,7 +120,7 @@ cls
 echo.
 echo %Credits%
 echo .......................................................
-echo Starting %ServerFileName%
+echo ServerJarName: %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
