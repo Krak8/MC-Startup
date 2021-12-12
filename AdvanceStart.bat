@@ -70,7 +70,7 @@ echo Maximum memory: %MaxRam% Initial memory: %IniRam%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
 echo Advance Flags(12gb+ server only): %HFlags%
-echo Vaanila GUI: %GUI%
+echo Vanila GUI: %GUI%
 echo [40;36m.......................................................[0m
 echo Server is starting ...
 timeout 10 >nul
@@ -137,7 +137,7 @@ echo Maximum memory: %MaxRam% Initial memory: %IniRam%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
 echo Advance Flags(12gb+ server only): %HFlags%
-echo Vaanila GUI: %GUI%
+echo Vanila GUI: %GUI%
 echo [40;36m.......................................................[0m
 echo.
 echo [40;32mPress any Key to start ...[0m
