@@ -14,7 +14,7 @@
 
 @echo off
 :: Define server file name here
-set ServerFileName=*jar
+set ServerFileName=server.jar
 
 :: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
 :: Maximum memory allocation pool
@@ -36,11 +36,8 @@ set JAVA=java
 :: By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula)
 set EULA=true
 
-:: credits of author
-set Credits=Made By Krak8 ^(https^://youtube.com/krak8^)
-
 :: Set console name here
-set Title=Server Console %Credits%
+set Title=Server Console Made By Krak8 ^(https^://youtube.com/krak8^)
 title %Title%
 
 :: -----------------------------------------------
@@ -63,7 +60,7 @@ timeout 3 >nul
 
 cls
 echo.
-echo [40;33m%Credits%
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;36m.......................................................
 echo [40;32mStarting %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
@@ -100,9 +97,9 @@ if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO START)
 
 :START
 cls
-echo [40;33m%Credits%[0m
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
-echo [40;33m%Credits%
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo.
 echo.
 echo [40;31mServer has closed or crashed...
@@ -114,12 +111,12 @@ goto Main
 
 :RESTART
 cls
-echo [40;33m%Credits%[0m
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
-echo [40;33m%Credits%[0m
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
 timeout 20
 cls
-echo [40;33m%Credits%
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo.
 echo [40;31mServer has closed or crashed...
 echo.
@@ -130,7 +127,7 @@ goto RESTART
 :Main
 cls
 echo.
-echo [40;33m%Credits%
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;36m.......................................................
 echo [40;32mServerJarName: %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
