@@ -14,7 +14,7 @@
 
 @echo off
 :: Define server file name here
-set ServerFileName=*.jar
+set ServerFileName=.\*jar
 
 :: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
 :: Maximum memory allocation pool
