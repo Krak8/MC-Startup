@@ -48,18 +48,19 @@ title %Title%
 :: Note: if something breaks contact Krak8 : https://youtube.com/krak8
 :: -----------------------------------------------
 
-:Main
+cls
 echo.
 echo %Credits%
-echo ....................................
+echo .......................................................
 echo Starting %ServerFileName%
-echo Maximum memory: %MaxRam%
-echo Initial memory: %IniRam%
+echo Maximum memory: %MaxRam% Initial memory: %IniRam%
+echo AutoRestart: %AutoRestart%
+echo EULA: %EULA%
 echo Advance Flags(12gb+ server only): %HFlags%
 echo Vaanila GUI: %GUI%
-echo AutoRestart: %AutoRestart%
-echo ....................................
-Pause
+echo .......................................................
+timeout 10
+
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
 
@@ -86,28 +87,24 @@ if %EULA%==false (
 if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO START)
 
 :START
-
+cls
 echo %Credits%
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
 echo %Credits%
-timeout 20
-cls
-echo %Credits%
+echo.
 echo.
 echo Server has closed or crashed...
 echo The Server will not AutoRestart
+echo Server will pause on main menu
 echo.
-echo 
 timeout 20
-goto MAIN
+goto Main
 
 :RESTART
 cls
-
 echo %Credits%
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
 echo %Credits%
-
 timeout 20
 cls
 echo %Credits%
@@ -117,3 +114,20 @@ echo.
 echo The Server will restart after the timeout close console window to stop server now!
 timeout 20
 goto RESTART
+
+:Main
+cls
+echo.
+echo %Credits%
+echo .......................................................
+echo Starting %ServerFileName%
+echo Maximum memory: %MaxRam% Initial memory: %IniRam%
+echo AutoRestart: %AutoRestart%
+echo EULA: %EULA%
+echo Advance Flags(12gb+ server only): %HFlags%
+echo Vaanila GUI: %GUI%
+echo .......................................................
+echo.
+echo Press ctr ^+ c to stop the process
+Pause
+goto START
