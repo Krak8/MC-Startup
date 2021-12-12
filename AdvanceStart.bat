@@ -50,16 +50,17 @@ title %Title%
 
 cls
 echo.
-echo %Credits%
-echo .......................................................
-echo Starting %ServerFileName%
+echo [40;33m%Credits%
+echo [40;36m.......................................................
+echo [40;32mStarting %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
 echo Advance Flags(12gb+ server only): %HFlags%
 echo Vaanila GUI: %GUI%
-echo .......................................................
-timeout 10
+echo [40;36m.......................................................[0m
+echo Server is starting ...
+timeout 10 >nul
 
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
@@ -69,7 +70,6 @@ if %GUI%==false set GUI=--nogui
 if %HFlags%==true set FLAGS=-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Daikars.new.flags=true -Dusing.aikars.flags=https://mcflags.emc.gs
 if %HFlags%==false set FLAGS=-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Daikars.new.flags=true -Dusing.aikars.flags=https://mcflags.emc.gs
 if %EULA%==true (
-    @echo off
     cd %localhost%
     echo #By changing the setting below to TRUE you are indicating your agreement to our EULA ^(https://account.mojang.com/documents/minecraft_eula^)^.> eula.txt
     echo #You also agree that tacos are tasty, and the best food in the world^.>> eula.txt
@@ -77,7 +77,6 @@ if %EULA%==true (
     echo eula=true>> eula.txt
     )
 if %EULA%==false (
-    @echo off
     cd %localhost%
     echo #By changing the setting below to TRUE you are indicating your agreement to our EULA ^(https://account.mojang.com/documents/minecraft_eula^)^.> eula.txt
     echo #You also agree that tacos are tasty, and the best food in the world^.>> eula.txt
@@ -88,46 +87,47 @@ if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO START)
 
 :START
 cls
-echo %Credits%
+echo [40;33m%Credits%[0m
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
-echo %Credits%
+echo [40;33m%Credits%
 echo.
 echo.
-echo Server has closed or crashed...
+echo [40;31mServer has closed or crashed...
 echo The Server will not AutoRestart
-echo Server will pause on main menu
+echo [40;37mServer will pause on Startup
 echo.
-timeout 20
+timeout 20 >nul
 goto Main
 
 :RESTART
 cls
-echo %Credits%
+echo [40;33m%Credits%[0m
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
-echo %Credits%
+echo [40;33m%Credits%[0m
 timeout 20
 cls
-echo %Credits%
+echo [40;33m%Credits%
 echo.
-echo Server has closed or crashed...
+echo [40;31mServer has closed or crashed...
 echo.
-echo The Server will restart after the timeout close console window to stop server now!
+echo [40;32mThe Server will restart after the timeout close console window to stop server now![0m
 timeout 20
 goto RESTART
 
 :Main
 cls
 echo.
-echo %Credits%
-echo .......................................................
-echo ServerJarName: %ServerFileName%
+echo [40;33m%Credits%
+echo [40;36m.......................................................
+echo [40;32mServerJarName: %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
 echo Advance Flags(12gb+ server only): %HFlags%
 echo Vaanila GUI: %GUI%
-echo .......................................................
+echo [40;36m.......................................................[0m
 echo.
-echo Press ctr ^+ c to stop the process
-Pause
+echo [40;32mPress any Key to start ...[0m
+echo Press [40;36mctr ^+ c[0m to stop the process
+Pause >nul
 goto START
