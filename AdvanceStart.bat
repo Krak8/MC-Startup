@@ -13,11 +13,22 @@
 ::
 
 @echo off
-:: credits of author
-set Credits=Made By Krak8 ^(https^://youtube.com/krak8^)
-
 :: Define server file name here
 set ServerFileName=server.jar
+
+:: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
+:: Maximum memory allocation pool
+set MaxRam=4G
+:: if MaxRam is 12 G or more then set it to true default = false
+set HFlags=false 
+:: Initial memory allocation pool (lower than maxram) default = 200M
+set IniRam=200M
+
+:: Restart mode on crash or /restart (true or false) default = true
+set AutoRestart=true
+
+:: Vanila server GUI (true/false)
+set GUI=false
 
 :: Define Java Here
 set JAVA=java
@@ -25,21 +36,12 @@ set JAVA=java
 :: By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula)
 set EULA=true
 
+:: credits of author
+set Credits=Made By Krak8 ^(https^://youtube.com/krak8^)
+
 :: Set console name here
 set Title=Server Console %Credits%
 title %Title%
-
-:: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
-:: Maximum memory allocation pool
-set MaxRam=4G
-:: if MaxRam is 12 G or more then set it to true default = false
-set HFlags=false 
-:: Initial memory allocation pool
-set IniRam=200M
-
-:: Vanila server GUI (true/false)
-set GUI=false
-
 
 :: -----------------------------------------------
 :: WARNING DO NOT CHANGE ANYTHING BELOW THIS LINE
@@ -55,6 +57,7 @@ echo Maximum memory: %MaxRam%
 echo Initial memory: %IniRam%
 echo Advance Flags(12gb+ server only): %HFlags%
 echo Vaanila GUI: %GUI%
+echo AutoRestart: %AutoRestart%
 echo ....................................
 timeout 20
 
@@ -80,6 +83,7 @@ if %EULA%==false (
     echo #Auto generated EULA from script Made By Krak8 ^(https^://youtube.com/krak8^)^. >> eula.txt
     echo eula=false>> eula.txt
     )
+if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO )
 
 :Start
 cls
