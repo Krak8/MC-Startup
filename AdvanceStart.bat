@@ -13,7 +13,7 @@
 :: https://github.com/Krak8/MC-Startup
 ::
 
-:: Startup Version - v1.0.0 (Do Not Change)
+:: Startup Version - v1.0.1 (Do Not Change)
 
 :: ---------------------------------------------------------------------------------------------------------------------------
 ::                                 Change the Values in the sction below
@@ -32,6 +32,9 @@ set IniRam=200M
 
 :: Restart mode on crash or /restart (true or false) default = true
 set AutoRestart=true
+
+:: Timeout in seconds to restart server if AutoRestart=true default = 10
+set TimeOut=10
 
 :: Vanila server GUI (true/false)
 set GUI=false
@@ -142,14 +145,14 @@ cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
 %JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
-timeout 20
+timeout %TimeOut%
 cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo.
 echo [40;31mServer has closed or crashed...
 echo.
 echo [40;32mThe Server will restart after the timeout close console window to stop server now![0m
-timeout 20
+timeout %TimeOut%
 goto RESTART
 
 :Main
