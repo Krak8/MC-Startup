@@ -33,7 +33,7 @@ set IniRam=200M
 :: Restart mode on crash or /restart (true or false) default = true
 set AutoRestart=true
 
-:: Timeout in seconds to restart server if AutoRestart=true default = 10
+:: Timeout in seconds to restart server if AutoRestart=true . Set it 0 to instantly restart server. default = 10 
 set TimeOut=10
 
 :: Vanila server GUI (true/false)
@@ -47,6 +47,18 @@ set EULA=true
 
 :: Set console name here
 set Title=Server Console Made By Krak8 ^(https^://youtube.com/krak8^)
+
+:: ---------------------------------------------------------------------------------------------------------------------------
+::                                 Advance Startup Flags
+:: ---------------------------------------------------------------------------------------------------------------------------
+
+:: ADVANCE FLAGS ONLY IF YOU KNOW HOW TO USE ! 
+:: WARNING DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING. USE OF WRONG FLAG MIGHT CURRUPT YOUR WORLD.
+:: You can use multiple flags here seperate them with space. 
+:: Available flags - ( --bonusChest --demo --eraseCache --forceUpgrade --help --initSettings --jfrprofile --port <Integer> --safeMode --serverId <String> --singleplayer <String> --universe <String> --world <String> )
+:: Check all the Flags from - https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server
+
+set AdvanceFlags=
 
 :: ---------------------------------------------------------------------------------------------------------------------------
 :: ---------------------------------------------------------------------------------------------------------------------------
@@ -129,7 +141,7 @@ if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO START)
 :START
 cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
-%JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
+%JAVA% %Ram% %FLAGS% %AdvanceFlags% -jar %ServerFileName% %GUI%
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo.
 echo.
@@ -143,7 +155,7 @@ goto Main
 :RESTART
 cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
-%JAVA% %Ram% %FLAGS% -jar %ServerFileName% %GUI%
+%JAVA% %Ram% %FLAGS% %AdvanceFlags% -jar %ServerFileName% %GUI%
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
 timeout %TimeOut%
 cls
