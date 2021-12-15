@@ -10,10 +10,10 @@
 :: |__/  \__/      |__/             \_______/      |__/  \__/       \______/ 
 ::
 :: Made By Krak8 (https://youtube.com/krak8)
-:: https://github.com/Krak8/MC-Startup
+:: Git - https://github.com/Krak8/MC-Startup
 ::
 
-:: Startup Version - v1.0.1 (Do Not Change)
+:: Startup Version - v1.0.6 (Do Not Change)
 
 :: ---------------------------------------------------------------------------------------------------------------------------
 ::                                         Change the Values in the section below
@@ -26,7 +26,7 @@ set ServerFileName=server.jar
 :: Maximum memory allocation pool
 set MaxRam=4G
 
-:: Use Aikar flags (true/false)
+:: Use Aikar flags (true/false) Set it to false if on lower version or server doesnt start with flags.
 set Flags=true
 :: if MaxRam is 12 G or more then set it to true default = false
 set HFlags=false 
