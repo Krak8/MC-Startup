@@ -16,7 +16,7 @@
 :: Startup Version - v1.0.1 (Do Not Change)
 
 :: ---------------------------------------------------------------------------------------------------------------------------
-::                                 Change the Values in the sction below
+::                                         Change the Values in the section below
 :: ---------------------------------------------------------------------------------------------------------------------------
 
 :: Define server file name here
@@ -25,12 +25,13 @@ set ServerFileName=server.jar
 :: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
 :: Maximum memory allocation pool
 set MaxRam=4G
+
+:: Use Aikar flags (true/false)
+set Flags=true
 :: if MaxRam is 12 G or more then set it to true default = false
 set HFlags=false 
-:: Initial memory allocation pool (lower than maxram) default = 200M
-set IniRam=200M
 
-:: Restart mode on crash or /restart (true or false) default = true
+:: Restart mode on crash or /restart (true/false) default = true
 set AutoRestart=true
 
 :: Timeout in seconds to restart server if AutoRestart=true . Set it 0 to instantly restart server. default = 10 
@@ -39,8 +40,11 @@ set TimeOut=10
 :: Vanila server GUI (true/false)
 set GUI=false
 
-:: Define Java Here
+:: Define Java Here default = java
 set JAVA=java
+
+:: Initial memory allocation pool (lower than maxram) default = 200M
+set IniRam=200M
 
 :: By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula)
 set EULA=true
@@ -49,7 +53,7 @@ set EULA=true
 set Title=Server Console Made By Krak8 ^(https^://youtube.com/krak8^)
 
 :: ---------------------------------------------------------------------------------------------------------------------------
-::                                 Advance Startup Flags
+::                                                 Advance Startup Flags
 :: ---------------------------------------------------------------------------------------------------------------------------
 
 :: ADVANCE FLAGS ONLY IF YOU KNOW HOW TO USE ! 
@@ -107,21 +111,24 @@ echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;36m.......................................................
 echo [40;32mStarting %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
+echo Flags: %Flags% 12Gb^+: %HFlags%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
-echo Advance Flags(12gb+ server only): %HFlags%
 echo Vanila GUI: %GUI%
 echo [40;36m.......................................................[0m
 echo Server is starting ...
-timeout 10 >nul
+timeout 3 >nul
 
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
 
 if %GUI%==true set %GUI%=
 if %GUI%==false set GUI=--nogui
-if %HFlags%==true set FLAGS=-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Daikars.new.flags=true -Dusing.aikars.flags=https://mcflags.emc.gs
-if %HFlags%==false set FLAGS=-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Daikars.new.flags=true -Dusing.aikars.flags=https://mcflags.emc.gs
+if %Flags%==true (
+    if %HFlags%==true set FlagsT=-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=40 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=16M -XX:G1ReservePercent=15 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=20 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Daikars.new.flags=true -Dusing.aikars.flags=https://mcflags.emc.gs
+    if %HFlags%==false set FlagsT=-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Daikars.new.flags=true -Dusing.aikars.flags=https://mcflags.emc.gs
+)
+if %Flags%==flags set FlagsT=
 if %EULA%==true (
     cd %localhost%
     echo #By changing the setting below to TRUE you are indicating your agreement to our EULA ^(https://account.mojang.com/documents/minecraft_eula^)^.> eula.txt
@@ -141,7 +148,7 @@ if %AutoRestart%==true (GOTO RESTART) ELSE (GOTO START)
 :START
 cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
-%JAVA% %Ram% %FLAGS% %AdvanceFlags% -jar %ServerFileName% %GUI%
+%JAVA% %Ram% %FlagsT% %AdvanceFlags% -jar %ServerFileName% %GUI%
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo.
 echo.
@@ -155,7 +162,7 @@ goto Main
 :RESTART
 cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
-%JAVA% %Ram% %FLAGS% %AdvanceFlags% -jar %ServerFileName% %GUI%
+%JAVA% %Ram% %FlagsT% %AdvanceFlags% -jar %ServerFileName% %GUI%
 echo.
 echo.
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
@@ -172,9 +179,9 @@ echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;36m.......................................................
 echo [40;32mServerJarName: %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
+echo Flags: %Flags% 12Gb^+: %HFlags%
 echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
-echo Advance Flags(12gb+ server only): %HFlags%
 echo Vanila GUI: %GUI%
 echo [40;36m.......................................................[0m
 echo.
