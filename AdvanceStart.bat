@@ -156,14 +156,12 @@ goto Main
 cls
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
 %JAVA% %Ram% %FLAGS% %AdvanceFlags% -jar %ServerFileName% %GUI%
-echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)[0m
-timeout %TimeOut%
-cls
-echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo.
+echo.
+echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;31mServer has closed or crashed...
 echo.
-echo [40;32mThe Server will restart after the timeout close console window to stop server now![0m
+echo [40;32mThe Server will restart after %TimeOut%s timeout close console window to stop server now![0m
 timeout %TimeOut%
 goto RESTART
 
