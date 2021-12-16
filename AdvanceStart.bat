@@ -13,7 +13,7 @@
 :: Git - https://github.com/Krak8/MC-Startup
 ::
 
-:: Startup Version - v1.0.8 (Do Not Change)
+:: Startup Version - v1.1.0 (Do Not Change)
 
 :: ---------------------------------------------------------------------------------------------------------------------------
 ::                                         Change the Values in the section below
