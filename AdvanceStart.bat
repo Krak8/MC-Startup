@@ -115,8 +115,8 @@ cls
 echo.
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;36m.......................................................
-echo Standalone/Proxy: %Standalone%
-echo [40;32mStarting %ServerFileName%
+echo [40;32mStandalone/Proxy: %Standalone%
+echo Starting %ServerFileName%
 echo Maximum memory: %MaxRam% Initial memory: %IniRam%
 echo Flags: %Flags% 12Gb^+: %HFlags%
 echo AutoRestart: %AutoRestart%
