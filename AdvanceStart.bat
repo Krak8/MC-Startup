@@ -25,22 +25,27 @@
 set Standalone=false
 
 :: Define server file name here
-set ServerFileName=server.jar 
+set ServerFileName=server.jar
 
 :: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
 :: Maximum memory allocation pool
 set MaxRam=1G
-
-:: Use Aikar flags (true/false) Set it to false if on lower version or server doesnt start with flags.
-set Flags=true
-:: if MaxRam is 12 G or more then set it to true default = false
-set HFlags=false 
 
 :: Restart mode on crash or /restart (true/false) default = true
 set AutoRestart=true
 
 :: Timeout in seconds to restart server if AutoRestart=true . Set it 0 to instantly restart server. default = 10 
 set TimeOut=10
+
+:: Auto Download server jar from https://serverjars.com/updater (auto updater)
+:: Supports - bukkit, paper, spigot, purpur, tuinity, bungeecord, velocity, waterfall and many more...
+:: Default = false
+set AutoDownload=false
+
+:: Use Aikar flags (true/false) Set it to false if on lower version or server doesnt start with flags.
+set Flags=true
+:: if MaxRam is 12 G or more then set it to true default = false
+set HFlags=false 
 
 :: Vanila server GUI (true/false)
 set GUI=false
@@ -128,6 +133,13 @@ timeout 3 >nul
 
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
+
+if not exist server.jar (
+    if %AutoDownload%==true (
+       echo downloading server.jar...
+       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/ServerJars/updater/releases/latest/download/ServerJars-3.jar, 'server.jar')"
+    )
+)
 
 if %Standalone%==true (
     if %AutoRestart%==true (GOTO RESTARTS) ELSE (GOTO STARTS)
