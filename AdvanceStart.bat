@@ -137,7 +137,7 @@ set Ram=-Xmx%MaxRam% -Xms%IniRam%
 if not exist server.jar (
     if %AutoDownload%==true (
        echo downloading server.jar...
-       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/ServerJars/updater/releases/latest/download/ServerJars-3.jar', 'server.jar')"
+       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/ServerJars/updater/releases/download/v3.2.0/ServerJars.jar', 'server.jar')"
     )
 )
 
