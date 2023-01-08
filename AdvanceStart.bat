@@ -1,105 +1,26 @@
 @echo off
-::
-::  /$$   /$$                                       /$$              /$$$$$$ 
-:: | $$  /$$/                                      | $$             /$$__  $$
-:: | $$ /$$/         /$$$$$$         /$$$$$$       | $$   /$$      | $$  \ $$
-:: | $$$$$/         /$$__  $$       |____  $$      | $$  /$$/      |  $$$$$$/
-:: | $$  $$        | $$  \__/        /$$$$$$$      | $$$$$$/        >$$__  $$
-:: | $$\  $$       | $$             /$$__  $$      | $$_  $$       | $$  \ $$
-:: | $$ \  $$      | $$            |  $$$$$$$      | $$ \  $$      |  $$$$$$/
-:: |__/  \__/      |__/             \_______/      |__/  \__/       \______/ 
-::
-:: Made By Krak8 (https://youtube.com/krak8)
-:: Git - https://github.com/Krak8/MC-Startup
-::
 
-:: Startup Version - v1.1.0 (Do Not Change)
+set Version=1.6.8
 
-:: ---------------------------------------------------------------------------------------------------------------------------
-::                                         Change the Values in the section below
-:: ---------------------------------------------------------------------------------------------------------------------------
+if not exist "AdvanceStartup" (
+mkdir AdvanceStartup
+)
 
-:: Change the type of server (false = spigot) & (true = bungee / waterfall / velocity / standalone)
-:: if set to true it will run any jar with matching jar name (note - it wont use any flags or optimizations)
-:: set it to true if using older version or vanilla Minecraft jar.
-set Standalone=false
+if not exist .\AdvanceStartup\AdvanceStartup.conf (
+    goto FIRSTSETUP
+) else (
+    goto BEGIN
+)
 
-:: Define server file name here
-set ServerFileName=server.jar
+:BEGIN
 
-:: Define ram allocation amount here you can use G for Gigabytes or M for Megabytes
-:: Maximum memory allocation pool
-set MaxRam=1G
-
-:: Restart mode on crash or /restart (true/false) default = true
-set AutoRestart=true
-
-:: Timeout in seconds to restart server if AutoRestart=true . Set it 0 to instantly restart server. default = 10 
-set TimeOut=10
-
-:: Auto Download server jar from https://serverjars.com/updater (auto updater)
-:: Supports - bukkit, paper, spigot, purpur, tuinity, bungeecord, velocity, waterfall and many more...
-:: Default = false
-set AutoDownload=false
-
-:: Use Aikar flags (true/false) Set it to false if on lower version or server doesnt start with flags.
-set Flags=true
-:: if MaxRam is 12 G or more then set it to true default = false
-set HFlags=false 
-
-:: Vanila server GUI (true/false)
-set GUI=false
-
-:: Define Java Here default = java
-set JAVA=java
-
-:: Initial memory allocation pool (lower than maxram) default = 200M
-set IniRam=200M
-
-:: By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula)
-set EULA=true
-
-:: Set console name here
-set Title=Server Console Made By Krak8 ^(https^://youtube.com/krak8^)
-
-:: ---------------------------------------------------------------------------------------------------------------------------
-::                                                 Advance Startup Flags
-:: ---------------------------------------------------------------------------------------------------------------------------
-
-:: ADVANCE FLAGS ONLY IF YOU KNOW HOW TO USE ! 
-:: WARNING DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING. USE OF WRONG FLAG MIGHT CURRUPT YOUR WORLD.
-:: You can use multiple flags here seperate them with space. 
-:: Available flags - ( --bonusChest --demo --eraseCache --forceUpgrade --help --initSettings --jfrprofile --port <Integer> --safeMode --serverId <String> --singleplayer <String> --universe <String> --world <String> )
-:: Check all the Flags from - https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server
-:: if you set Flags=false then u can use custom flags here. just seperate flags using space.
-
-set AdvanceFlags=
-
-:: ---------------------------------------------------------------------------------------------------------------------------
-:: ---------------------------------------------------------------------------------------------------------------------------
-
-:: -----------------------------------------------
-:: WARNING DO NOT CHANGE ANYTHING BELOW THIS LINE
-:: Note: if something breaks contact Krak8 : https://youtube.com/krak8
-:: -----------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for /f "delims=" %%i in (.\AdvanceStartup\AdvanceStartup.conf) do (
+    if not "%%i" == "#*" (
+        for /f "tokens=1,2 delims==" %%a in ("%%i") do (
+            set "%%a=%%b"
+        )
+    )
+)
 
 
 title %Title%
@@ -114,7 +35,7 @@ echo [40;33m^| $$\  $$       ^| $$             /$$__  $$      ^| $$_  $$       
 echo [40;33m^| $$ \  $$      ^| $$            ^|  $$$$$$$      ^| $$ \  $$      ^|  $$$$$$/
 echo [40;33m^|__/  \__/      ^|__/             \_______/      ^|__/  \__/       \______/ 
 
-timeout 3 >nul
+timeout 2 >nul
 
 cls
 echo.
@@ -128,8 +49,9 @@ echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
 echo Vanila GUI: %GUI%
 echo [40;36m.......................................................[0m
+echo Edit AdvanceStartup.conf to make changes to AdvanceStartup
 echo Server is starting ...
-timeout 3 >nul
+timeout 6 >nul
 
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
@@ -179,7 +101,7 @@ echo.
 echo.
 echo [40;31mServer has closed or crashed...
 echo The Server will not AutoRestart
-echo [40;37mServer will pause on Startup
+echo [40;37mServer will pause on AdvanceStartup
 echo.
 timeout 20 >nul
 goto MainM
@@ -224,7 +146,7 @@ echo.
 echo.
 echo [40;31mServer has closed or crashed...
 echo The Server will not AutoRestart
-echo [40;37mServer will pause on Startup
+echo [40;37mServer will pause on AdvanceStartup
 echo.
 timeout 20 >nul
 goto MainS
@@ -256,3 +178,101 @@ echo [40;32mPress any Key to start ...[0m
 echo Press [40;36mctr ^+ c[0m to stop the process
 Pause >nul
 goto STARTS
+
+:FIRSTSETUP
+cls
+echo Enter Maximum Ram Allocation for Minecraft Server. ^(Eg:1G,1024M^)
+set /p MaxRam=
+if "%MaxRam%" == "" set MaxRam=1G
+echo AutoDownload the server jar file ^(true/false^)
+set /p AutoDownload=
+if "%AutoDownload%" == "" set AutoDownload=true
+echo AutoRestart the Minecraft Server ^(true/false^)
+set /p AutoRestart=
+if "%AutoRestart%" == "" set AutoRestart=true
+echo Use Aikar flags ^(true/false^)
+set /p Flags=
+if "%Flags%" == "" set Flags=true
+echo Enable server GUI default=false ^(true/false^)
+set /p GUI=
+if "%GUI%" == "" set GUI=false
+echo Do you agree to Minecraft's EULA ^(true/false^)
+set /p EULA=
+if "%EULA%" == "" set EULA=false
+
+echo #  > .\AdvanceStartup\AdvanceStartup.conf
+echo #  /$$   /$$                                       /$$              /$$$$$$  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^| $$  /$$/                                      ^| $$             /$$__  $$ >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^| $$ /$$/         /$$$$$$         /$$$$$$       ^| $$   /$$      ^| $$  \ $$ >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^| $$$$$/         /$$__  $$       ^|____  $$      ^| $$  /$$/      ^|  $$$$$$/ >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^| $$  $$        ^| $$  \__/        /$$$$$$$      ^| $$$$$$/        ^>$$__  $$ >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^| $$\  $$       ^| $$             /$$__  $$      ^| $$_  $$       ^| $$  \ $$ >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^| $$ \  $$      ^| $$            ^|  $$$$$$$      ^| $$ \  $$      ^|  $$$$$$/ >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ^|__/  \__/      ^|__/             \_______/      ^|__/  \__/       \______/  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Made By Krak8 ^(https^://youtube.com/krak8^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Git - https^://github.com/Krak8/MC-AdvanceStartup >> .\AdvanceStartup\AdvanceStartup.conf
+echo # >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # AdvanceStartup Version - %Version% ^(Do Not Change^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # --------------------------------------------------------------------------------------------------------------------------- >> .\AdvanceStartup\AdvanceStartup.conf
+echo #                                         Change the Values in the section below >> .\AdvanceStartup\AdvanceStartup.conf
+echo # --------------------------------------------------------------------------------------------------------------------------- >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Change the type of server ^(false = spigot^) ^& ^(true = bungee / waterfall / velocity / standalone^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo # if set to true it will run any jar with matching jar name ^(note - it wont use any flags or optimizations^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo # set it to true if using older version or vanilla Minecraft jar. >> .\AdvanceStartup\AdvanceStartup.conf
+echo Standalone=false >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Define server file name here >> .\AdvanceStartup\AdvanceStartup.conf
+echo ServerFileName=server.jar >> .\AdvanceStartup\AdvanceStartup.conf
+echo. >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Define ram allocation amount here you can use G for Gigabytes or M for Megabytes >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Maximum memory allocation pool >> .\AdvanceStartup\AdvanceStartup.conf
+echo MaxRam=%MaxRam% >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Restart mode on crash or /restart ^(true/false^) default = true >> .\AdvanceStartup\AdvanceStartup.conf
+echo AutoRestart=%AutoRestart% >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Timeout in seconds to restart server if AutoRestart=true . Set it 0 to instantly restart server. default = 10  >> .\AdvanceStartup\AdvanceStartup.conf
+echo TimeOut=5 >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Auto Download server jar from https^://serverjars.com/updater ^(auto updater^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Supports - bukkit, paper, spigot, purpur, tuinity, bungeecord, velocity, waterfall and many more... >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Default = false >> .\AdvanceStartup\AdvanceStartup.conf
+echo AutoDownload=%AutoDownload% >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Use Aikar flags ^(true/false^) Set it to false if on lower version or server doesnt start with flags. >> .\AdvanceStartup\AdvanceStartup.conf
+echo Flags=%Flags% >> .\AdvanceStartup\AdvanceStartup.conf
+echo # if MaxRam is 12 G or more then set it to true default = false >> .\AdvanceStartup\AdvanceStartup.conf
+echo HFlags=false  >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Vanila server GUI ^(true/false^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo GUI=%GUI% >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Define Java Here default = java >> .\AdvanceStartup\AdvanceStartup.conf
+echo JAVA=java >> .\AdvanceStartup\AdvanceStartup.conf
+echo. >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Initial memory allocation pool ^(lower than maxram^) default = 200M >> .\AdvanceStartup\AdvanceStartup.conf
+echo IniRam=200M >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # By changing the setting below to TRUE you are indicating your agreement to Mojang EULA ^(https^://account.mojang.com/documents/minecraft_eula^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo EULA=%EULA% >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Set console name here >> .\AdvanceStartup\AdvanceStartup.conf
+echo Title=Server Console Made By Krak8 ^^(https^^://youtube.com/krak8^^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # --------------------------------------------------------------------------------------------------------------------------- >> .\AdvanceStartup\AdvanceStartup.conf
+echo #                                                 Advance AdvanceStartup Flags >> .\AdvanceStartup\AdvanceStartup.conf
+echo # --------------------------------------------------------------------------------------------------------------------------- >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # ADVANCE FLAGS ONLY IF YOU KNOW HOW TO USE !  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # WARNING DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING. USE OF WRONG FLAG MIGHT CURRUPT YOUR WORLD. >> .\AdvanceStartup\AdvanceStartup.conf
+echo # You can use multiple flags here seperate them with space.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Available flags - ^( --bonusChest --demo --eraseCache --forceUpgrade --help --initSettings --jfrprofile --port <Integer> --safeMode --serverId <String> echo --singleplayer <String> --universe <String> --world <String> ^) >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Check all the Flags from - https^://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server >> .\AdvanceStartup\AdvanceStartup.conf
+echo # if you set Flags=false then u can use custom flags here. just seperate flags using space. >> .\AdvanceStartup\AdvanceStartup.conf
+echo.  >> .\AdvanceStartup\AdvanceStartup.conf
+echo AdvanceFlags= >> .\AdvanceStartup\AdvanceStartup.conf
+goto BEGIN
