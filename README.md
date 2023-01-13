@@ -7,22 +7,22 @@ This script is designed to automate the process of starting and maintaining a Mi
 
 ## Features
 
-▸ Standalone / Proxies Jar
-▸ Customizable Jar Name
-▸ Customizable Ram
-▸ Toggleable Aikar Flags
-▸ Toggleable Advanced Aikar Flags for 12Gb + ram
-▸ AutoRestart Toggle
-▸ Adjustable Timeouts for restart
-▸ Gui Toggle for Consoles
-▸ Adjuatable Java Home
-▸ Auto Create EULA (need to agree in setup first)
-▸ Customizable Title of console
-▸ Advance / Custom flags Support
-▸ User-Friendly
+▸ Standalone / Proxies Jar  
+▸ Auto-Download ServerJar  
+▸ Customizable Jar Name  
+▸ Customizable Ram  
+▸ Toggleable Aikar Flags  
+▸ Toggleable Advanced Aikar Flags for 12Gb + ram  
+▸ AutoRestart Toggle  
+▸ Adjustable Timeouts for restart  
+▸ Gui Toggle for Consoles  
+▸ Adjuatable Java Home  
+▸ Auto Create EULA (need to agree in setup first)  
+▸ Customizable Title of console  
+▸ Advance / Custom flags Support  
+▸ User-Friendly 
 
 ## Requirements
-
 - A Windows operating system
 - Java 8 or later (depending on the server version.)
 - A command-line tool such as Command Prompt or PowerShell
@@ -33,6 +33,9 @@ This script is designed to automate the process of starting and maintaining a Mi
 3. First run will ask question and generate the config and store it in "AdvanceStartup" directory.
 4. Edit config in "AdvanceStartup" directory if necessarry.
 5. Your server is ready.
+
+## Note
+If any of the configuration is wrong or needs changing then head over to **AdvanceStartup** directory and edit **AdvanceStartup.conf**
 
 ## Author
 ▸ [Youtube](https://www.youtube.com/@Krak8)
