@@ -5,6 +5,22 @@ Fully Customizable Bat file to Start Minecraft Server with single click. Aikar F
 
 This script is designed to automate the process of starting and maintaining a Minecraft server. It includes features such as automatic downloading of the latest server using [ServerJars](https://serverjars.com/) and automatic restarting of the server in the event of a crash or scheduled downtime.
 
+## Features
+
+▸ Standalone / Proxies Jar
+▸ Customizable Jar Name
+▸ Customizable Ram
+▸ Toggleable Aikar Flags
+▸ Toggleable Advanced Aikar Flags for 12Gb + ram
+▸ AutoRestart Toggle
+▸ Adjustable Timeouts for restart
+▸ Gui Toggle for Consoles
+▸ Adjuatable Java Home
+▸ Auto Create EULA (need to agree in setup first)
+▸ Customizable Title of console
+▸ Advance / Custom flags Support
+▸ User-Friendly
+
 ## Requirements
 
 - A Windows operating system
@@ -17,3 +33,8 @@ This script is designed to automate the process of starting and maintaining a Mi
 3. First run will ask question and generate the config and store it in "AdvanceStartup" directory.
 4. Edit config in "AdvanceStartup" directory if necessarry.
 5. Your server is ready.
+
+## Author
+▸ [Youtube](https://www.youtube.com/@Krak8)
+▸ [Discord](https://discord.gg/ZGCmmgR)
+▸ [Spigot](https://www.spigotmc.org/resources/authors/krak8.1304172/)
