@@ -37,6 +37,12 @@ This script is designed to automate the process of starting and maintaining a Mi
 ## Note
 If any of the configuration is wrong or needs changing then head over to **AdvanceStartup** directory and edit **AdvanceStartup.conf**
 
+## Screenshots
+
+![Configuration Screenshot](https://github.com/Krak8/MC-Startup/blob/main/screenshots/screenshot_config.png?raw=true)
+
+![Console Screenshot](https://github.com/Krak8/MC-Startup/blob/main/screenshots/screenshot_console.png?raw=true)
+
 ## Author
 ▸ [Youtube](https://www.youtube.com/@Krak8)
 ▸ [Discord](https://discord.gg/ZGCmmgR)
