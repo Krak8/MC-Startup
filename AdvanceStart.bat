@@ -1,11 +1,13 @@
 @echo off
+:: Batch file version 
+set Version=1.7.2
 
-set Version=1.6.8
-
+:: Check if the startup config directory exists if not creat a new directory
 if not exist "AdvanceStartup" (
 mkdir AdvanceStartup
 )
 
+:: Check if the config file exists if not create a new config file
 if not exist .\AdvanceStartup\AdvanceStartup.conf (
     goto FIRSTSETUP
 ) else (
@@ -14,6 +16,7 @@ if not exist .\AdvanceStartup\AdvanceStartup.conf (
 
 :BEGIN
 
+:: Reads the startup config file and fetches the variables from the config file and ignores "#" comments
 for /f "delims=" %%i in (.\AdvanceStartup\AdvanceStartup.conf) do (
     if not "%%i" == "#*" (
         for /f "tokens=1,2 delims==" %%a in ("%%i") do (
@@ -22,9 +25,11 @@ for /f "delims=" %%i in (.\AdvanceStartup\AdvanceStartup.conf) do (
     )
 )
 
-
+:: Sets the title of the console window
 title %Title%
 cls
+
+:: Self Advertisement
 echo.
 echo [40;33m /$$   /$$                                       /$$              /$$$$$$ 
 echo [40;33m^| $$  /$$/                                      ^| $$             /$$__  $$
@@ -38,6 +43,8 @@ echo [40;33m^|__/  \__/      ^|__/             \_______/      ^|__/  \__/      
 timeout 2 >nul
 
 cls
+
+:: Prints the current configuration
 echo.
 echo [40;33mServer Console Made By Krak8 ^(https^://youtube.com/krak8^)
 echo [40;36m.......................................................
@@ -59,7 +66,7 @@ set Ram=-Xmx%MaxRam% -Xms%IniRam%
 if not exist server.jar (
     if %AutoDownload%==true (
        echo downloading server.jar...
-       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/ServerJars/updater/releases/download/v3.2.0/ServerJars.jar', 'server.jar')"
+       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/ServerJars/updater/releases/download/v3.2.2/ServerJars.jar', 'server.jar')"
     )
 )
 
@@ -180,24 +187,43 @@ Pause >nul
 goto STARTS
 
 :FIRSTSETUP
+
+doskey y=true
+doskey n=false
+doskey Y=true
+doskey N=false
+
 cls
 echo Enter Maximum Ram Allocation for Minecraft Server. ^(Eg:1G,1024M^)
-set /p MaxRam=
+set /p MaxRam=Ram ^(Must have M or G for Megabytes and Gigabytes respectively.^):
 if "%MaxRam%" == "" set MaxRam=1G
-echo AutoDownload the server jar file ^(true/false^)
-set /p AutoDownload=
+if defined MaxRam (
+    if not "%MaxRam:~-1%"=="M" if not "%MaxRam:~-1%"=="G" (
+        echo Invalid input, input should be one or more numbers followed by "M" or "G".
+        echo Press any key to start over...
+        pause >nul
+        goto FIRSTSETUP
+    )
+)
+echo.
+echo AutoDownload the server jar file ^(y/n^)
+set /p AutoDownload= AutoDownload ^(y/n^):
 if "%AutoDownload%" == "" set AutoDownload=true
-echo AutoRestart the Minecraft Server ^(true/false^)
-set /p AutoRestart=
+echo.
+echo AutoResrart the Minecraft Server on crash or restart command ^(y/n^)
+set /p AutoRestart= AutoResrart ^(y/n^):
 if "%AutoRestart%" == "" set AutoRestart=true
-echo Use Aikar flags ^(true/false^)
-set /p Flags=
+echo.
+echo Use Aikar flags ^(y/n^)
+set /p Flags= Flags ^(y/n^):
 if "%Flags%" == "" set Flags=true
-echo Enable server GUI default=false ^(true/false^)
-set /p GUI=
+echo.
+echo Enable server GUI default=n ^(y/n^)
+set /p GUI= GUI ^(y/n^):
 if "%GUI%" == "" set GUI=false
-echo Do you agree to Minecraft's EULA ^(true/false^)
-set /p EULA=
+echo.
+echo Do you agree to Minecraft's EULA ^(y/n^)
+set /p EULA= EULA ^(y/n^):
 if "%EULA%" == "" set EULA=false
 
 echo #  > .\AdvanceStartup\AdvanceStartup.conf
@@ -211,7 +237,7 @@ echo # ^| $$ \  $$      ^| $$            ^|  $$$$$$$      ^| $$ \  $$      ^|  $
 echo # ^|__/  \__/      ^|__/             \_______/      ^|__/  \__/       \______/  >> .\AdvanceStartup\AdvanceStartup.conf
 echo # >> .\AdvanceStartup\AdvanceStartup.conf
 echo # Made By Krak8 ^(https^://youtube.com/krak8^) >> .\AdvanceStartup\AdvanceStartup.conf
-echo # Git - https^://github.com/Krak8/MC-AdvanceStartup >> .\AdvanceStartup\AdvanceStartup.conf
+echo # Git - https^://github.com/Krak8/MC-Startup >> .\AdvanceStartup\AdvanceStartup.conf
 echo # >> .\AdvanceStartup\AdvanceStartup.conf
 echo.  >> .\AdvanceStartup\AdvanceStartup.conf
 echo # AdvanceStartup Version - %Version% ^(Do Not Change^) >> .\AdvanceStartup\AdvanceStartup.conf
