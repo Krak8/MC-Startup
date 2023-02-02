@@ -28,7 +28,7 @@ This script is designed to automate the process of starting and maintaining a Mi
 - A command-line tool such as Command Prompt or PowerShell
 
 ## How to use
-1. Download the script and save it as a '.bat' file.
+1. Download the script and save it as a '.bat' file. [download latest](https://github.com/Krak8/MC-Startup/releases/latest/download/AdvanceStart.bat)
 2. Run the script either by double clicking it or executing using console.
 3. First run will ask question and generate the config and store it in "AdvanceStartup" directory.
 4. Edit config in "AdvanceStartup" directory if necessarry.
