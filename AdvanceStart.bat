@@ -1,6 +1,6 @@
 @echo off
 :: Batch file version 
-set Version=1.7.2
+set Version=1.7.4
 
 :: Check if the startup config directory exists if not creat a new directory
 if not exist "AdvanceStartup" (
@@ -56,17 +56,18 @@ echo AutoRestart: %AutoRestart%
 echo EULA: %EULA%
 echo Vanila GUI: %GUI%
 echo [40;36m.......................................................[0m
-echo Edit AdvanceStartup.conf to make changes to AdvanceStartup
+echo Edit AdvanceStartup.conf to make changes to AdvanceStartup or press 0
 echo Server is starting ...
-timeout 6 >nul
-
+CHOICE /N /T 6 /D 9 /C:09 
+cls
+if %errorlevel%==1 ( goto  :FIRSTSETUP )
 
 set Ram=-Xmx%MaxRam% -Xms%IniRam%
 
 if not exist server.jar (
     if %AutoDownload%==true (
        echo downloading server.jar...
-       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/ServerJars/updater/releases/download/v3.2.2/ServerJars.jar', 'server.jar')"
+       powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/songoda/ServerJars-Updater/releases/latest/download/ServerJars.jar', 'server.jar')"
     )
 )
 
@@ -188,11 +189,6 @@ goto STARTS
 
 :FIRSTSETUP
 
-doskey y=true
-doskey n=false
-doskey Y=true
-doskey N=false
-
 cls
 echo Enter Maximum Ram Allocation for Minecraft Server. ^(Eg:1G,1024M^)
 set /p MaxRam=Ram ^(Must have M or G for Megabytes and Gigabytes respectively.^):
@@ -206,25 +202,30 @@ if defined MaxRam (
     )
 )
 echo.
-echo AutoDownload the server jar file ^(y/n^)
-set /p AutoDownload= AutoDownload ^(y/n^):
-if "%AutoDownload%" == "" set AutoDownload=true
+echo AutoDownload the server jar file ^(Y/N^)
+CHOICE /N /C:YN /M "AutoDownload (Y/N): "
+if %errorlevel%==1 set AutoDownload=true
+if %errorlevel%==2 set AutoDownload=false
 echo.
-echo AutoResrart the Minecraft Server on crash or restart command ^(y/n^)
-set /p AutoRestart= AutoResrart ^(y/n^):
-if "%AutoRestart%" == "" set AutoRestart=true
+echo AutoRestart the Minecraft Server on crash or restart command ^(Y/N^)
+CHOICE /N /C:YN /M "AutoRestart (Y/N): "
+if %errorlevel%==1 set AutoRestart=true
+if %errorlevel%==2 set AutoRestart=false
 echo.
-echo Use Aikar flags ^(y/n^)
-set /p Flags= Flags ^(y/n^):
-if "%Flags%" == "" set Flags=true
+echo Use Aikar flags ^(Y/N^)
+CHOICE /N /C:YN /M "Aikar Flags (Y/N): "
+if %errorlevel%==1 set Flags=true
+if %errorlevel%==2 set Flags=false
 echo.
-echo Enable server GUI default=n ^(y/n^)
-set /p GUI= GUI ^(y/n^):
-if "%GUI%" == "" set GUI=false
+echo Enable server GUI default=N ^(Y/N^)
+CHOICE /N /T 5 /D N /C:YN /M "GUI (Y/N): "
+if %errorlevel%==1 set GUI=true
+if %errorlevel%==2 set GUI=false
 echo.
-echo Do you agree to Minecraft's EULA ^(y/n^)
-set /p EULA= EULA ^(y/n^):
-if "%EULA%" == "" set EULA=false
+echo Do you agree to Minecraft's EULA ^(Y/N^)
+CHOICE /N /C:YN /M "EULA (Y/N): "
+if %errorlevel%==1 set EULA=true
+if %errorlevel%==2 set EULA=false
 
 echo #  > .\AdvanceStartup\AdvanceStartup.conf
 echo #  /$$   /$$                                       /$$              /$$$$$$  >> .\AdvanceStartup\AdvanceStartup.conf
