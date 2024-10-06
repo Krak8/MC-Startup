@@ -1,0 +1,69 @@
+
+
+#  /$$   /$$                                       /$$              /$$$$$$
+# | $$  /$$/                                      | $$             /$$__  $$
+# | $$ /$$/         /$$$$$$         /$$$$$$       | $$   /$$      | $$  \ $$
+# | $$$$$/         /$$__  $$       |____  $$      | $$  /$$/      |  $$$$$$/
+# | $$  $$        | $$  \__/        /$$$$$$$      | $$$$$$/        >$$__  $$
+# | $$\  $$       | $$             /$$__  $$      | $$_  $$       | $$  \ $$
+# | $$ \  $$      | $$            |  $$$$$$$      | $$ \  $$      |  $$$$$$/
+# |__/  \__/      |__/             \_______/      |__/  \__/       \______/
+#
+# Made By Krak8 (https://youtube.com/krak8)
+# Git - https://github.com/Krak8/MC-Startup
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------------
+#                                         Configure your server settings here
+# ---------------------------------------------------------------------------------------------------------------------------
+
+# set the type of server you are trying to run. 
+# proxy servers : bungee, waterfall, velocity, any normal jar.
+# Non proxy servers : Paper, Spigot, Purpur...
+# setting this to true will not use Aikar flags
+proxy: false
+
+# Name of the jar file used to start server
+serverjar: server.jar
+
+# Define ram allocation amount here you can use G for Gigabytes or M for Megabytes (Eg: 1024M / 1G) 
+# Maximum memory allocation pool 
+maxram: 4G 
+# Initial memory allocation pool (lower than maxram) default = 200M 
+# Do not change this unless you know what you are doing.
+iniRam: 200M 
+
+# Choose if the server should auto restart upon crash or execution of restart command (true/false) 
+# default = true 
+autorestart: true 
+
+# Timeout in seconds to auto restart server if AutoRestart=true . Set it 0 to instantly restart server. default = 5
+timeout: 5
+
+# Use Aikar flags (true/false) Set it to false if on lower version or server doesnt start with flags. 
+# Won't be used if proxy is set to true
+aikarflags: true 
+
+# Choose if vanila server GUI should be enabled (true/false) 
+GUI: false 
+
+# By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula) 
+EULA: false
+
+# Set console name/title for identification here 
+Title: Advanced Server starter by Krak8 ^(https^://krak8.xyz^) 
+
+
+
+# --------------------------------------------------------------------------------------------------------------------------- 
+#                                                 Advance AdvanceStartup Flags 
+# --------------------------------------------------------------------------------------------------------------------------- 
+
+# ADVANCE FLAGS ONLY IF YOU KNOW HOW TO USE !  
+# WARNING DO NOT CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING. USE OF WRONG FLAG MIGHT CURRUPT YOUR WORLD. 
+# You can use multiple flags here seperate them with space.  
+# Check all the Flags from - https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server 
+# if you set Flags=false then u can use custom flags here. just seperate flags using space. 
+
+AdvanceFlags:  
