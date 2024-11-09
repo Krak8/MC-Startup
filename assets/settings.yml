@@ -25,7 +25,7 @@
 proxy: false
 
 # Automatically downloads the server using https://mcutils.com/server-jars/
-# This uses 3rd party jars and I (author) is not responsible fpr any damages caused.
+# This uses 3rd party jars and I (author) am not responsible for any damages caused.
 # Uses powershell to download the jar and it won't work without powershell.
 autodownload: false
 
