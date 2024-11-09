@@ -3,7 +3,7 @@ Fully Customizable Bat file to Start Minecraft Server with single click. Aikar F
 
 ## Introduction
 
-This script is designed to automate the process of starting and maintaining a Minecraft server. It includes features such as automatic downloading of the latest server using [ServerJars](https://serverjars.com/) and automatic restarting of the server in the event of a crash or scheduled downtime.
+This script is designed to automate the process of starting and maintaining a Minecraft server. It includes features such as automatic downloading of the latest server using [MC Utils ServerJars](https://mcutils.com/server-jars) and automatic restarting of the server in the event of a crash or scheduled downtime.
 
 ## Features
 
@@ -26,9 +26,10 @@ This script is designed to automate the process of starting and maintaining a Mi
 - A Windows operating system
 - Java 8 or later (depending on the server version.)
 - A command-line tool such as Command Prompt or PowerShell
+- Text editor
 
 ## How to use
-1. Download the script and save it as a '.bat' file. [download latest](https://github.com/Krak8/MC-Startup/releases/latest/download/AdvanceStart.bat)
+1. Download the script and save it as a '.bat' file. [download latest](https://github.com/Krak8/MC-Startup/releases/latest/download/start.bat)
 2. Run the script either by double clicking it or executing using console.
 3. First run will ask question and generate the config and store it in "AdvanceStartup" directory.
 4. Edit config in "AdvanceStartup" directory if necessarry.
