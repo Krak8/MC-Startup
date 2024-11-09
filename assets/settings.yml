@@ -24,7 +24,13 @@
 # setting this to true will not use Aikar flags
 proxy: false
 
+# Automatically downloads the server using https://mcutils.com/server-jars/
+# This uses 3rd party jars and I (author) is not responsible fpr any damages caused.
+# Uses powershell to download the jar and it won't work without powershell.
+autodownload: false
+
 # Name of the jar file used to start server
+# DO NOT CHANGE IF AUTODOWNLOAD is set to True
 serverjar: server.jar
 
 # Define ram allocation amount here you can use G for Gigabytes or M for Megabytes (Eg: 1024M / 1G) 
