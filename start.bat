@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-set Version=1.7.5
+set Version=1.7.6
 set configDir=.\.AdvanceStartup
 :: change the line below to use different java (point to java.exe)
 set java=java
@@ -172,6 +172,7 @@ goto :eof
 
 :autodownload
 del %serverjar%
+del %configDir%\autodownload.log
 set autoUrl=https://mcutils.com/api/server-jars
 :: Fetch the JSON data using PowerShell and save it to a temporary file
 powershell -Command "Invoke-WebRequest -Uri '%autoUrl%' -UseBasicParsing | Select-Object -ExpandProperty Content | Out-File -FilePath server.json"
