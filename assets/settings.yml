@@ -18,24 +18,32 @@
 #                                         Configure your server settings here
 # ---------------------------------------------------------------------------------------------------------------------------
 
-# set the type of server you are trying to run.
-# proxy servers : bungee, waterfall, velocity, any normal jar.
-# Non proxy servers : Paper, Spigot, Purpur...
-# setting this to true will not use Aikar flags
-proxy: false
+# change the line below to use different java version (point to javaw.exe)
+# default to "java" to use default java version
+java: java
+
+# By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula)
+EULA: false
 
 # Automatically downloads the server using https://mcutils.com/server-jars/
 # This uses 3rd party jars and I (author) am not responsible for any damages caused.
 # Uses powershell to download the jar and it won't work without powershell.
 autodownload: false
 
+# Define ram allocation amount here you can use G for Gigabytes or M for Megabytes (Eg: 1024M / 1G)
+# Maximum memory allocation pool
+maxram: 4G
+
+# set the type of server you are trying to run.
+# proxy servers : bungee, waterfall, velocity, any normal jar.
+# Non proxy servers : Paper, Spigot, Purpur...
+# setting this to true will not use Aikar flags
+proxy: false
+
 # Name of the jar file used to start server
 # DO NOT CHANGE IF AUTODOWNLOAD is set to True
 serverjar: server.jar
 
-# Define ram allocation amount here you can use G for Gigabytes or M for Megabytes (Eg: 1024M / 1G)
-# Maximum memory allocation pool
-maxram: 4G
 # Initial memory allocation pool (lower than maxram) default = 200M
 # Do not change this unless you know what you are doing.
 iniRam: 200M
@@ -54,9 +62,6 @@ aikarflags: true
 # Choose if vanila server GUI should be enabled (true/false)
 # set this to true if server is throwing error
 GUI: false
-
-# By changing the setting below to TRUE you are indicating your agreement to Mojang EULA (https://account.mojang.com/documents/minecraft_eula)
-EULA: false
 
 # Set console name/title for identification here
 Title: Advanced Server starter by Krak8 ^(https^://krak8.xyz^)

@@ -1,0 +1,29 @@
+@echo off
+echo Setting colors variables. This can take a while.
+set C_BLACK=[30m>nul
+set C_BLUE=[34m>nul
+set C_CYAN=[36m>nul
+set C_GREEN=[32m>nul
+set C_PURPLE=[35m>nul
+set C_RED=[31m>nul
+set C_WHITE=[37m>nul
+set C_YELLOW=[33m>nul
+set C_BRIGHTBLACK=[1;30m>nul
+set C_BRIGHTBLUE=[1;34m>nul
+set C_BRIGHTCYAN=[1;36m>nul
+set C_BRIGHTGREEN=[1;32m>nul
+set C_BRIGHTPURPLE=[1;35m>nul
+set C_BRIGHTRED=[1;31m>nul
+set C_BRIGHTWHITE=[1;37m>nul
+set C_BRIGHTYELLOW=[1;33m>nul
+set C_BG_BLACK=[40m>nul
+set C_BG_BLUE=[44m>nul
+set C_BG_CYAN=[46m>nul
+set C_BG_GREEN=[42m>nul
+set C_BG_PURPLE=[45m>nul
+set C_BG_RED=[41m>nul
+set C_BG_WHITE=[47m>nul
+set C_BG_YELLOW=[43m>nul
+set C_RESET=[0m>nul
+echo Done
+pause

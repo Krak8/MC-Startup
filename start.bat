@@ -1,9 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
-set Version=1.7.6
+set Version=1.7.7
 set configDir=.\.AdvanceStartup
-:: change the line below to use different java (point to java.exe)
-set java=java
 
 :firstbootcheck
  :: Check if the startup config directory exists if not creat a new directory & configfile
@@ -19,6 +17,15 @@ for /f "delims=" %%i in (%configDir%\settings.yml) do (
         )
     )
 )
+:: Reads the installed server version if auto download was used
+for /f "delims=" %%i in (%configDir%\autodownload.log) do (
+    if not "%%i" == "#*" (
+        for /f "tokens=1,2 delims=: " %%a in ("%%i") do (
+            set "%%a=%%b"
+        )
+    )
+)
+
 
 :: Sets the title of the console window
 title %Title%
@@ -38,11 +45,18 @@ echo [40;32mAutoRestart: [40;33m%autorestart%
 echo [40;32mEULA: [40;33m%EULA%
 echo [40;32mVanila GUI: [40;33m%GUI%
 echo [40;36m.......................................................[0m
-echo To make changes to current configuration press 0
+echo To make changes to current configuration press [33m0[0m
+echo To Change java version press [33m1[0m 
+if %autodownload%==true ( 
+    echo press [33m2[0m to change server type or server version.
+    echo You are using [1;34m%aServerJarType%[0m^-[1;34m%aServerVersion%[0m
+)
 echo Server is starting ...
-CHOICE /N /T 6 /D 9 /C:09 
+CHOICE /N /T 6 /D 9 /C:0912 
 cls
 if %errorlevel%==1 ( call  :configedit )
+if %errorlevel%==3 ( call :javaInstall )
+if %errorlevel%==4 ( goto :autodownload)
 
 :autorestart
 if %autorestart%==true (
@@ -58,7 +72,6 @@ if %autorestart%==true (
 call :ram
 call :flags
 call :gui
-call :pre_autodownload
 call :eula 
 
 :: Running the forge server
@@ -127,25 +140,6 @@ if %GUI%==false set gui=--nogui
 cls
 goto :eof
 
-:pre_autodownload
-:: Reads the server auto download log and fetches the variables from the file if exists and ignores "#" comments
-for /f "delims=" %%i in (%configDir%\autodownload.log) do (
-    if not "%%i" == "#*" (
-        for /f "tokens=1,2 delims=: " %%a in ("%%i") do (
-            set "%%a=%%b"
-        )
-    )
-)
-if %autodownload%==true (
-    if not exist "%configDir%\autodownload.log" ( call :autodownload ) else (
-        echo You are currently using %aServerJarType%^-%aServerVersion% 
-        echo if you want to change or update the curent server jar press 0 else ignore.
-        CHOICE /N /T 6 /D 9 /C:09
-        if %errorlevel%==1 ( call  :autodownload )
-    )
-)
-cls
-goto :eof
 
 :firstboot
 cls
@@ -167,6 +161,49 @@ echo Press any key once you are done editing the settings.
 echo Remember to save the file before pressing key
 start "" "%configDir%\settings.yml"
 pause >nul
+cls
+goto :eof
+
+:javaInstall
+cls
+echo Choose the java version to install (1-5):
+echo 1. Java 8  ^(1.8 to 1.11^)
+echo 2. Java 11 ^(1.12 to 1.16.4^)
+echo 3. Java 16 ^(1.16.5^)
+echo 4. Java 17 ^(1.17.1 to 1.19.2^)
+echo 5. Java 21 ^(1.20^+^)
+CHOICE /N /C:12345
+
+if %errorlevel%==1 (
+    cls
+    echo Installing Java 8
+    winget install --id "EclipseAdoptium.Temurin.8.JDK" -i
+)
+
+if %errorlevel%==2 (
+    cls
+    echo Installing Java 11
+    winget install --id "EclipseAdoptium.Temurin.11.JDK" -i
+)
+
+if %errorlevel%==3 (
+    cls
+    echo Installing Java 16
+    winget install --id "EclipseAdoptium.Temurin.16.JDK" -i
+)
+
+if %errorlevel%==4 (
+    cls
+    echo Installing Java 17
+    winget install --id "EclipseAdoptium.Temurin.17.JDK" -i
+)
+
+if %errorlevel%==5 (
+    cls
+    echo Installing Java 21
+    winget install --id "EclipseAdoptium.Temurin.21.JDK" -i
+)
+
 cls
 goto :eof
 
@@ -256,7 +293,7 @@ if !autoServerJar!==forge (
     for /f "tokens=2 delims=;" %%a in ('findstr /i "content-disposition" headers.txt') do (
         set rawname=%%a
     )
-    rem Remove "forge-" and "-installer.jar" 
+    :: Remove "forge-" and "-installer.jar" 
     set "temp=!rawname:"forge-=!" 
     set "rawfilename=!temp:-installer.jar"=!"
     rem Extract the filename
@@ -271,6 +308,31 @@ if !autoServerJar!==forge (
     del run.bat
     del run.sh
 )
+
+:: handler for neoforge
+if !autoServerJar!==neoforge (
+    :: Download the file and save the response headers
+    curl -IL "%autoUrl%/!autoServerJar!/!autoVersion!/download" > headers.txt
+    :: Read the line from headers.txt
+    for /f "tokens=2 delims=;" %%a in ('findstr /i "content-disposition" headers.txt') do (
+        set rawname=%%a
+    )
+    :: Remove "neoforge-" and "-installer.jar" 
+    set "temp=!rawname:"neoforge-=!" 
+    set "rawfilename=!temp:-installer.jar"=!"
+    rem Extract the filename
+    for /f "tokens=2 delims== " %%a in ("!rawfilename!") do (
+        set filename=%%a
+    )
+    echo afilename: !filename! >> %configDir%\autodownload.log
+    %java% -jar %serverjar% --installServer
+    del headers.txt
+    del user_jvm_args.txt
+    del server.jar.log
+    del run.bat
+    del run.sh
+)
+
 timeout 2 >nul
 cls
 goto :startserver
